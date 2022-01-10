@@ -37,7 +37,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const authenticateUser = (req, res, next) => {
+const authenticateUser = async (req, res, next) => {
   const accessToken = req.header('Authorization')
 
   try {
