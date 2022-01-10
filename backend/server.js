@@ -19,7 +19,7 @@ app.use(express.json())
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello world!')
 })
 
 // Start the server
