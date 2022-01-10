@@ -37,11 +37,33 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+const authenticateUser = (req, res, next) => {
+  const accessToken = req.header('Authorization')
+
+  try {
+    const user = await User.findOne({ accessToken })
+    if (user) {
+      next()
+    } else {
+      res.status(404).json({ response: 'Please log in', success: false })
+    }
+  } catch (error) {
+    res.status(400).json({ response: error, success: false })
+  }
+}
+
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello world!!!')
+  res.send('Hello world!!!aaa')
 })
 
+// Secret authenticate test
+app.get('/secret', authenticateUser)
+app.get('/secret', (req, res) => {
+  res.send('Secret right here')
+})
+
+// POST method for signing up user with hashed password
 app.post('/signup', async (req, res) => {
   const { username, password } = req.body
 
@@ -66,6 +88,7 @@ app.post('/signup', async (req, res) => {
   }
 })
 
+// POST method for signing in user compairing hashed password
 app.post('/signin', async (req, res) => {
   const { username, password } = req.body
 
