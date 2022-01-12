@@ -58,9 +58,10 @@ app.get('/', (req, res) => {
 })
 
 // Secret authenticate test
-app.get('/secret', authenticateUser)
-app.get('/secret', (req, res) => {
-  res.send('Secret right here')
+app.get('/thoughts', authenticateUser)
+app.get('/thoughts', (req, res) => {
+  const thoughts = await Thought.find({});
+	res.status(201).json({ response: thoughts, success: true });
 })
 
 // POST method for signing up user with hashed password
@@ -81,7 +82,7 @@ app.post('/signup', async (req, res) => {
         username: newUser.username,
         accessToken: newUser.accessToken
       },
-      sucess: true
+      success: true
     })
   } catch (error) {
     res.status(400).json({ response: error, success: false })
