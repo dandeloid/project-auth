@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
 
 // Secret authenticate test
 app.get('/thoughts', authenticateUser)
-app.get('/thoughts', (req, res) => {
+app.get('/thoughts', async (req, res) => {
   const thoughts = await Thought.find({});
 	res.status(201).json({ response: thoughts, success: true });
 })
