@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { API_URL } from '../utils/constants'
+import user from '../reducers/user'
 import thoughts from '../reducers/thoughts'
 
 const Main = () => {
@@ -42,7 +43,7 @@ const Main = () => {
     return (
         <div> 
             <div>
-                <Link to='/login'>To "/login" !</Link>
+                <button onClick={() => {dispatch(user.actions.logout())}}>Logout</button>
             </div>
             <h1>Protected thoughts:</h1>
             {thoughtsItems.map((item) => (

@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch, batch } from 'react-redux'
-import { useNavigate, Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { API_URL } from 'utils/constants'
 import user from '../reducers/user'
+
+import { 
+    PageWrapper,
+    Form,
+    Wrapper,
+    Radiowrapper,
+    RadioButton,
+    H1,
+    H2,
+    Radios,
+    Radiolabel,
+    Input,
+    Label,
+    Button,
+  } from './styles_login'
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -55,43 +70,57 @@ const Login = () => {
     }
 
     return (
-		<>
-			<div>
-				<Link to="/">To '/' !</Link>
-			</div>
-			<label htmlFor="signup">Signup</label>
-			<input
-				id="signup"
-				type="radio"
-				checked={mode === 'signup'}
-				onChange={() => setMode('signup')}
-			/>
-			<label htmlFor="signin">Signin</label>
-			<input
-				id="signin"
-				type="radio"
-				checked={mode === 'signin'}
-				onChange={() => setMode('signin')}
-			/>
-			<form onSubmit={onFormSubmit}>
-				<label htmlFor="username">Username</label>
-				<input
-					id="username"
-					type="text"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-				/>
-				<label htmlFor="password">Password</label>
-				<input
-					id="password"
-					type="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<button type="submit">Submit</button>
-			</form>
-		</>
-	);
-};
 
-export default Login;
+        <PageWrapper>
+            <div>
+                <H1>Hello! Sign up!</H1>
+                <H2> Already a user? - Sign in!</H2>
+            </div>
+            <Radios>
+                <Radiowrapper>
+                    <RadioButton
+                        id="signup"
+                        type="radio"
+                        checked={mode === 'signup'}
+                        onChange={() => setMode('signup')}
+                    />
+                    <Radiolabel htmlFor="signup">Sign up</Radiolabel>
+                </Radiowrapper>
+                <Radiowrapper>
+                    <RadioButton
+                        id="signin"
+                        type="radio"
+                        checked={mode === 'signin'}
+                        onChange={() => setMode('signin')}
+                    />
+                    <Radiolabel htmlFor="signin">Sign in</Radiolabel>
+                </Radiowrapper>
+            </Radios>
+			<Form onSubmit={onFormSubmit}>
+                <Wrapper>
+                    <Label htmlFor="username">Username</Label>
+                    <Input
+                        id="username"
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </Wrapper>
+                
+                <Wrapper>
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </Wrapper>
+
+				<Button type="submit">Submit</Button>
+			</Form>
+		</PageWrapper>
+	)
+}
+
+export default Login
