@@ -26,6 +26,15 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema)
 
+const ThoughtSchema = new mongoose.Schema({
+	message: {
+		type: String,
+		required: true,
+	},
+});
+
+const Thought = mongoose.model('Thought', ThoughtSchema);
+
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
 //
